@@ -7,6 +7,15 @@ const SearchBar: FC = () => {
   const [location, setLocation] = useState<string>("");
   const router = useRouter();
 
+  const handleSearch = () => {
+    if (location === "") {
+      return;
+    }
+
+    router.push(`/search?city=${location}`);
+    setLocation("");
+  };
+
   return (
     <div className="text-left text-lg py-3 m-auto flex justify-center">
       <input
@@ -17,7 +26,7 @@ const SearchBar: FC = () => {
         onChange={(event) => setLocation(event.target.value)}
       />
       <button
-        onClick={() => router.push("/search")}
+        onClick={handleSearch}
         className="rounded bg-red-600 px-9 py-2 text-white"
       >
         Let's go
