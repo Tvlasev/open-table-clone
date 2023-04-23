@@ -9,6 +9,7 @@ import Reservation from "./components/Reservation";
 import { FC } from "react";
 import { PrismaClient } from '@prisma/client';
 import { RestaurantType } from "../../types";
+import { notFound } from "next/navigation";
 
 const prisma = new PrismaClient();
 
@@ -27,7 +28,7 @@ const fetchRestaurant = async (slug: string): Promise<RestaurantType> => {
   })
 
   if (!restaurant) {
-    throw new Error();
+    notFound();
   }
 
   return restaurant;

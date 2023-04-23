@@ -5,7 +5,7 @@ import { RestaurantCardType } from "../../types"
 const RestaurantCard = ({ name, main_page, price, location, cuisine, slug }: RestaurantCardType) => {
 
   return (
-    <div className="py-3 px-36 mt-10 flex flex-wrap justify-center">
+    <div className="py-3 px-14 mt-2 flex flex-row">
       <Link href={`/restaurant/${slug}`}>
         <div className="p-4 w-64 h-72 m-3 rounded overflow-hidden cursor-pointer bg-gray-100 border-2 border-rose-600">
           <img

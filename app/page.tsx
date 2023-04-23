@@ -16,7 +16,7 @@ const fetchRestaurants = async (): Promise<RestaurantCardType[]> => {
       price: true,
       main_page: true,
       slug: true,
-    }
+    },
   });
 
   return restaurants;
@@ -28,20 +28,22 @@ const Home = async () => {
   return (
     <main>
       <Header />
-      {restaurants.map((res: RestaurantCardType) => {
-        return (
-          <RestaurantCard
-            key={res.id}
-            name={res.name}
-            location={res.location}
-            cuisine={res.cuisine}
-            price={res.price}
-            main_page={res.main_page}
-            id={res.id}
-            slug={res.slug}
-          />
-        );
-      })}
+      <div className="py-3 px-36 flex flex-row justify-center">
+        {restaurants.map((res: RestaurantCardType) => {
+          return (
+            <RestaurantCard
+              key={res.id}
+              name={res.name}
+              location={res.location}
+              cuisine={res.cuisine}
+              price={res.price}
+              main_page={res.main_page}
+              id={res.id}
+              slug={res.slug}
+            />
+          );
+        })}
+      </div>
     </main>
   );
 };
