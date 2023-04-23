@@ -1,30 +1,34 @@
-import { FC } from "react";
 import Link from "next/link";
+import { RestaurantCardType } from "../../types"
 
-const RestaurantCard: FC = () => {
+
+const RestaurantCard = ({ name, main_page, price, location, cuisine, slug }: RestaurantCardType) => {
+
   return (
-    <Link href="/restaurant/milestones-grill">
-      <div className="w-64 h-72 m-3 rounded overflow-hidden border cursor-pointer">
-        <img
-          src="https://resizer.otstatic.com/v2/photos/wide-huge/2/31852905.jpg"
-          alt=""
-          className="w-full h-36"
-        />
-        <div className="p-1">
-          <h3 className="font-bold text-2xl mb-2">Milestones Grill</h3>
-          <div className="flex items-start">
-            <div className="flex mb-2">*****</div>
-            <p className="ml-2">77 reviews</p>
+    <div className="py-3 px-36 mt-10 flex flex-wrap justify-center">
+      <Link href={`/restaurant/${slug}`}>
+        <div className="p-4 w-64 h-72 m-3 rounded overflow-hidden cursor-pointer bg-gray-100 border-2 border-rose-600">
+          <img
+            src={main_page}
+            alt=""
+            className="w-full h-36"
+          />
+          <div className="p-1">
+            <h3 className="font-bold text-2xl mb-2">{name}</h3>
+            <div className="flex items-start">
+              <div className="flex mb-2">*****</div>
+              <p className="ml-2">77 reviews</p>
+            </div>
+            <div className="flex text-reg font-light capitalize">
+              <p className=" mr-3">{cuisine.name}</p>
+              <p className="mr-3">{price}</p>
+              <p>{location.name}</p>
+            </div>
+            <p className="text-sm mt-1 font-bold">Booked 3 times today</p>
           </div>
-          <div className="flex text-reg font-light capitalize">
-            <p className=" mr-3">Mexican</p>
-            <p className="mr-3">$$$$</p>
-            <p>Toronto</p>
-          </div>
-          <p className="text-sm mt-1 font-bold">Booked 3 times today</p>
         </div>
-      </div>
-    </Link>
+      </Link>
+    </div>
   );
 };
 

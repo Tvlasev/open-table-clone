@@ -1,15 +1,47 @@
-import NavBar from "./components/NavBar/NavBar";
 import Header from "./components/Header/Header";
 import RestaurantCard from "./components/RestaurantCard/RestaurantCard";
-import { FC } from "react";
+import { PrismaClient } from "@prisma/client";
+import { Restaurant } from "@prisma/client";
+import { RestaurantCardType } from "./types";
 
-const Home: FC = () => {
+const prisma = new PrismaClient();
+
+const fetchRestaurants = async (): Promise<RestaurantCardType[]> => {
+  const restaurants = await prisma.restaurant.findMany({
+    select: {
+      id: true,
+      name: true,
+      location: true,
+      cuisine: true,
+      price: true,
+      main_page: true,
+      slug: true,
+    }
+  });
+
+  return restaurants;
+};
+
+const Home = async () => {
+  const restaurants = await fetchRestaurants();
+
   return (
     <main>
       <Header />
-      <div className="py-3 px-36 mt-10 flex flex-wrap justify-center">
-        <RestaurantCard />
-      </div>
+      {restaurants.map((res: RestaurantCardType) => {
+        return (
+          <RestaurantCard
+            key={res.id}
+            name={res.name}
+            location={res.location}
+            cuisine={res.cuisine}
+            price={res.price}
+            main_page={res.main_page}
+            id={res.id}
+            slug={res.slug}
+          />
+        );
+      })}
     </main>
   );
 };

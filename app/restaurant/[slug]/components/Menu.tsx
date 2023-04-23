@@ -1,7 +1,7 @@
-import { FC } from "react";
 import MenuCard from "./MenuCard";
+import { Item } from "@prisma/client";
 
-const Menu: FC = () => {
+const Menu = ({ menuItems }: { menuItems: Item[] }) => {
   return (
     <main className="bg-white mt-5">
       <div>
@@ -9,7 +9,16 @@ const Menu: FC = () => {
           <h1 className="font-bold text-4xl">Menu</h1>
         </div>
         <div className="flex flex-wrap justify-between">
-          <MenuCard/>
+          {menuItems.map((item: Item) => {
+            return (
+              <MenuCard
+                name={item.name}
+                description={item.description}
+                price={item.price}
+                key={item.id}
+              />
+            );
+          })}
         </div>
       </div>
     </main>
